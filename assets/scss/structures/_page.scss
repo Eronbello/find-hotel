@@ -1,0 +1,7 @@
+.tui-container {
+  max-width: 1200px;
+  width: 100%;
+  @media screen and (max-width: $screen-tui-l) {
+    padding: 0 20px;
+  }
+}
