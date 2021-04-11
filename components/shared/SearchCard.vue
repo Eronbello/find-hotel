@@ -63,7 +63,6 @@ export default Vue.extend({
     },
   }),
   mounted() {
-    console.log(this.form)
     this.params = this.form
   },
   methods: {
