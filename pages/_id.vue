@@ -1,19 +1,35 @@
 <template>
   <div class="tui-details-page">
     <div class="tui-container">
-      <div v-if="!hotel.hotel" class="tui-details-page__loading">
+      <div v-if="isLoading" class="tui-details-page__loading">
         <LoadingIcon />
       </div>
       <div v-else class="tui-details-page__detail">
         <img
+          class="tui-details-page__background"
           src="https://www.hotelpremiumcampinas.com.br/wp-content/uploads/2020/01/banner-home-2020.jpg"
           alt="room-detail"
         />
         <div class="tui-details-page__title">
-          <h1>{{ hotel.hotel.name }}</h1>
-          <Stars
-            :rating="hotel.hotel.rating ? parseInt(hotel.hotel.rating) : 1"
-          />
+          <h1>
+            {{ hotel.hotel.name }}
+            <Stars
+              :rating="hotel.hotel.rating ? parseInt(hotel.hotel.rating) : 1"
+            />
+          </h1>
+          <div v-if="weather.WeatherIcon" class="tui-details-page__weather">
+            <span
+              >Temperature: {{ weather.Temperature.Metric.Value }} &#8451;</span
+            >
+            <img
+              :src="`https://developer.accuweather.com/sites/default/files/${
+                weather.WeatherIcon > 9
+                  ? weather.WeatherIcon
+                  : '0' + weather.WeatherIcon
+              }-s.png`"
+              alt="weather icon"
+            />
+          </div>
         </div>
         <div class="tui-details-page__address">
           <h3>
@@ -46,18 +62,35 @@
 <script lang="ts">
 import Vue from 'vue'
 import apiService from '@/services/api'
+import apiWeatherService from '@/services/weatherApi'
 import LoadingIcon from '@/components/shared/LoadingIcon.vue'
 import Stars from '@/components/shared/Stars.vue'
 export default Vue.extend({
   components: { LoadingIcon, Stars },
   data: () => ({
     hotel: {},
+    weather: {},
+    isLoading: true,
   }),
   async mounted() {
+    this.isLoading = true
     const id = this.$route.path as string
     const response = await apiService.searchById(id)
     const data = await response.json()
     this.hotel = data.data
+    const cityName = data.data.hotel.address.cityName
+    const weatherResponse = await apiWeatherService.searchCity(
+      cityName as string
+    )
+    const dataWeather = await weatherResponse.json()
+    if (dataWeather.length > 0) {
+      const responseWeatherCity = await apiWeatherService.searchWeather(
+        dataWeather[0].Key as string
+      )
+      const dataWeatherCity = await responseWeatherCity.json()
+      this.weather = dataWeatherCity[0]
+    }
+    this.isLoading = false
   },
 })
 </script>
@@ -72,11 +105,19 @@ export default Vue.extend({
     justify-content: center;
     height: 90%;
   }
-  &__detail {
+  &__weather {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
-      width: 100%;
+      width: 100px;
       height: auto;
     }
+  }
+
+  &__background {
+    width: 100%;
+    height: auto;
   }
   &__title {
     display: flex;
@@ -126,10 +167,21 @@ export default Vue.extend({
     }
   }
   @media screen and (max-width: $screen-tui-s) {
+    &__title {
+      flex-direction: column;
+      align-items: initial;
+      ol {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+    }
     &__amenities {
       ol {
         max-height: initial;
       }
+    }
+    &__weather {
+      justify-content: initial;
     }
   }
 }
