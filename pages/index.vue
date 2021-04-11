@@ -911,6 +911,8 @@ export default Vue.extend({
   animation: fade-in-top ease 0.4s forwards;
   animation-delay: 0.4s;
   margin-top: 50px;
+  position: relative;
+  z-index: -1;
   &__title {
     margin-bottom: 50px;
     font-size: 1.5rem;

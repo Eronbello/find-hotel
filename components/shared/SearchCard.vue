@@ -67,9 +67,9 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .tui-search-card {
   padding: 40px;
+  position: relative;
   background-color: white;
   width: 100%;
-  z-index: 200;
   height: 350px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   display: flex;
@@ -81,7 +81,6 @@ export default Vue.extend({
   }
   &__date-picker {
     width: 49%;
-    z-index: 10;
   }
   &__title {
     font-style: normal;
@@ -102,6 +101,13 @@ export default Vue.extend({
   }
   @media screen and (max-width: $screen-tui-s) {
     padding: 20px;
+    &__date {
+      flex-direction: column;
+    }
+    &__date-picker {
+      width: 100%;
+      margin-top: 2px;
+    }
   }
 }
 </style>
