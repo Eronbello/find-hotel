@@ -1,7 +1,13 @@
 <template>
   <header class="tui-header">
     <div class="tui-container">
-      <Logo />
+      <NuxtLink
+        class="tui-search-card__action"
+        :to="{
+          path: '/',
+        }"
+        ><Logo
+      /></NuxtLink>
     </div>
   </header>
 </template>
