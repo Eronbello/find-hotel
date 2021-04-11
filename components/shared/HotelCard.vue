@@ -23,9 +23,9 @@
           >{{
             `${hotel.offers[0].price.currency}  ${hotel.offers[0].price.total}`
           }}
-          / noite</span
+          / night</span
         >
-        <a>Detalhes</a>
+        <a>Details</a>
       </div>
     </div>
   </div>
