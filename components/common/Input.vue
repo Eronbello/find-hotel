@@ -36,6 +36,16 @@ export default {
 .tui-input {
   display: flex;
   flex-direction: column;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
   input {
     height: 48px;
     flex-direction: row;
