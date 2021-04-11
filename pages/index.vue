@@ -1,19 +1,24 @@
 <template>
   <div class="tui-main-page">
+    <Toaster
+      message="Please fill all the form"
+      color="#d40e14"
+      :show="showToaster"
+    />
     <div class="tui-container">
       <section class="tui-search">
         <div class="tui-search__title">
-          <h1>O SEU QUARTO ESTÁ PRONTO</h1>
+          <h1>YOUR ROOM IS READY</h1>
           <h2>
-            Encontre resorts, hotéis, apartamentos, casas e muito mais, com o
-            melhor preço. É só pesquisar o destino dos seus sonhos!
+            Find resorts, hotels, apartments, houses and more, with best price.
+            Just search for your dream destination!
           </h2>
         </div>
-        <SearchCard class="tui-search__card" />
+        <SearchCard :form="form" class="tui-search__card" @search="onSearch" />
       </section>
       <section class="tui-categories"></section>
       <section class="tui-recommended">
-        <h3 class="tui-recommended__title">Estadias recomendadas</h3>
+        <h3 class="tui-recommended__title">Recommended stays</h3>
         <div class="tui-recommended__list">
           <template v-for="(hotel, index) in hotelList">
             <hotel-card :key="index" :hotel="hotel" @selected="openDetails" />
@@ -28,57 +33,234 @@
 import Vue from 'vue'
 import HotelCard from '@/components/shared/HotelCard.vue'
 import SearchCard from '@/components/shared/SearchCard.vue'
+import Toaster from '@/components/shared/Toaster.vue'
 export default Vue.extend({
-  components: { HotelCard, SearchCard },
+  components: { HotelCard, SearchCard, Toaster },
   data: () => ({
     hotelList: [
       {
         type: 'hotel-offers',
         hotel: {
           type: 'hotel',
-          hotelId: 'HIPARC12',
-          chainCode: 'HI',
-          dupeId: '700132326',
-          name: 'HOLIDAY INN PARIS-NOTRE DAME123',
+          hotelId: 'YZSAO082',
+          chainCode: 'YZ',
+          dupeId: '700061690',
+          name: 'STAYBRIDGE SUITES SAO PAULO',
           rating: '3',
-          cityCode: 'PAR',
-          latitude: 48.85254,
-          longitude: 2.34198,
+          cityCode: 'SAO',
+          latitude: -23.58781,
+          longitude: -46.67492,
           hotelDistance: {
-            distance: 0.3,
+            distance: 4.8,
             distanceUnit: 'KM',
           },
           address: {
-            lines: ['4 RUE DANTON'],
-            postalCode: '75006',
-            cityName: 'PARIS',
-            countryCode: 'FR',
+            lines: ['RUA BANDEIRA PAULISTA', '555 CENTURY PLAZA BRASCAN'],
+            postalCode: '04532 011',
+            cityName: 'ITAIM BIBI-SAO PAOLO',
+            countryCode: 'BR',
+            stateCode: 'SP',
           },
           contact: {
-            phone: '+33 1 81690060',
-            fax: '+33 1 81690061',
+            phone: '+55 11 37066600',
+            fax: '+55 11 37066610',
           },
           description: {
             lang: 'en',
             text:
-              'This boutique style eco hotel is in the heart of Paris 5 minutes walk from Notre Dame Cathedral and a short stroll from the Louvre museum. Regular RER trains run to Paris Charles de Gaulle Airport and Paris Orly Airport in 30 minutes. It is a 5 minute walk to Saint Michel Notre Dame Metro station for links to company offices on Avenue de France and events at Paris Nord Villepinte Exhibition and Convention Centre. There are 3 air conditioned meeting rooms with wireless Internet which can accommodate up to 55 of your colleagues. You can round off your meeting with cocktails on the roof terrace with panoramic views of Paris. Internet is available 24 hours a day on the 2 computers in the Lobby and there is high speed Internet in all Guest rooms.',
+              'Find the Excitement of Sao Paulo Brazil at Hotels Front Door. You will be swept away by the beauty and vibrant culture of Brazil that surrounds the Staybridge Suites Sao Paulo hotel. The nearby Faria Lima and Avenida Paulista area features the citys best entertainment and bustling commerce districts. Guests traveling on business or leisure are captivated by the stunning skyscrapers and cosmopolitan lifestyle of Sao Paulo. The hotels location is in the center of the Brascan Century Plaza complex which offers nine restaurants six movie theaters three coffee shops a bookstore cash exchange point and more. This complex is also a hub for major corporations like JP Morgan AT Kearney and KPMG. High speed wireless Internet access helps ensure that the hotels corporate guests can be productive within the comfort of a secure suite. Travel is also convenient as the domestic Congonhas Airport is just 15 minutes away. The exclusive Itaim Bibi area has something for everyone. Many of the best music theatre museum and dining offerings are found in the breathtaking metropolis of Sao Paulo. Sao Paulo and the hotels amenities delight the most discerning of guests. The outdoor pool sauna valet parking free breakfast buffet and helipad are a few of the perks carefully chosen for your comfort. This award winning hotel impresses guests with its exceptional services bestowed with a Brazilian flair. Make your plans today.',
           },
           amenities: [
             '24_HOUR_FRONT_DESK',
             '24_HOUR_ROOM_SERVICE',
-            'ATM/CASH_MACHINE',
+            'COFFEE_SHOP',
+            'EXPRESS_CHECK_OUT',
+            'ACCESSIBLE_FACILITIES',
+            'WHEELCHAIR_ACCESSIBLE_PUBLIC_AREA',
+            'HANDRAILS_BATHROOM',
+            'WHEELCHAIR_ACCESSIBLE_ELEVATORS',
+            'ACCESSIBLE_PARKING',
+            'WHEELCHAIR_ACCESSIBLE_ROOM',
+            'ICE_MACHINES',
+            'GARAGE_PARKING',
+            'JOGGING_TRACK',
+            'LAUNDRY_SERVICE',
+            'ON-SITE_PARKING',
+            'OUTDOOR_POOL',
+            'PARKING',
+            'SWIMMING_POOL',
+            'SOLARIUM',
+            'CONVENIENCE_STORE',
+            'DRY_CLEANING',
+            'PORTER/BELLBOY',
+            'FRONT_DESK',
+            'WIFI',
+            'WIRELESS_CONNECTIVITY',
+            'DVD/VIDEO_RENTAL',
+            'CHILDRENS_PLAY_AREA',
+            'HIGH_SPEED_WIRELESS',
+            'FEMA_FIRE_SAFETY_COMPLIANT',
+            'PHOTOCOPIER',
+            'PRINTER',
+            'BUSINESS_CENTER',
+            'COMPUTER_RENTAL',
+            'CONFERENCE_SUITE',
+            'CONVENTION_CENTRE',
+            'MEETING_FACILITIES',
+            'FIRE_SAFETY',
+            'EMERGENCY_BACKUP_GENERATOR',
+            'EMERGENCY_LIGHTING',
+            'FIRE_DETECTORS',
+            'GUARDED_PARKING',
+            'SPRINKLERS',
+            'SECURITY_GUARD',
+            'VIDEO_SURVEILANCE',
+            'EXTINGUISHERS',
+            'FEMA_FIRE_SAFETY_COMPLIANT',
+          ],
+          media: [
+            {
+              uri:
+                'http://uat.multimediarepository.testing.amadeus.com/cmr/retrieve/hotel/26BFBE6CF4DE489F9656E52F0881D600',
+              category: 'EXTERIOR',
+            },
+          ],
+        },
+        available: true,
+        offers: [
+          {
+            id: 'MHZDB6GWVB',
+            checkInDate: '2021-04-11',
+            checkOutDate: '2021-04-12',
+            rateCode: '22A',
+            rateFamilyEstimated: {
+              code: 'BAR',
+              type: 'P',
+            },
+            boardType: 'BREAKFAST',
+            room: {
+              type: '*RH',
+              typeEstimated: {
+                category: 'SUITE',
+                beds: 1,
+                bedType: 'QUEEN',
+              },
+              description: {
+                text:
+                  'BEST FLEXIBLE RATE\nSTANDARD ROOM SUITE WITH 38SQM 1 QUEEN BED, AC,\nTV 40",BIG WORKSPACE,HSIA. KITCHENETTE W DINING',
+                lang: 'PT',
+              },
+            },
+            guests: {
+              adults: 2,
+            },
+            price: {
+              currency: 'BRL',
+              base: '600.00',
+              total: '634.85',
+              taxes: [
+                {
+                  code: 'MISCELLANEOUS',
+                  pricingFrequency: 'PER_NIGHT',
+                  pricingMode: 'PER_PRODUCT',
+                  amount: '4.85',
+                  currency: 'BRL',
+                  included: false,
+                },
+                {
+                  code: 'MISCELLANEOUS',
+                  pricingFrequency: 'PER_NIGHT',
+                  pricingMode: 'PER_PRODUCT',
+                  percentage: '5.00',
+                  included: false,
+                },
+              ],
+              variations: {
+                average: {
+                  base: '600.00',
+                },
+                changes: [
+                  {
+                    startDate: '2021-04-11',
+                    endDate: '2021-04-12',
+                    base: '600.00',
+                  },
+                ],
+              },
+            },
+            policies: {
+              guarantee: {
+                acceptedPayments: {
+                  creditCards: ['AX', 'VI', 'CA', 'DC'],
+                  methods: ['CREDIT_CARD'],
+                },
+              },
+              paymentType: 'guarantee',
+              cancellation: {
+                numberOfNights: 1,
+                deadline: '2021-04-09T14:36:00-03:00',
+              },
+            },
+          },
+        ],
+        self:
+          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=YZSAO082&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
+      },
+      {
+        type: 'hotel-offers',
+        hotel: {
+          type: 'hotel',
+          hotelId: 'HILISECB',
+          chainCode: 'HI',
+          dupeId: '700008208',
+          name: 'HOLIDAY INN',
+          rating: '3',
+          cityCode: 'LIS',
+          latitude: 38.738,
+          longitude: -9.14118,
+          hotelDistance: {
+            distance: 2.7,
+            distanceUnit: 'KM',
+          },
+          address: {
+            lines: ['AV ANTONIO JOSE DE ALMEIDA 28'],
+            postalCode: '1000 044',
+            cityName: 'LISBON',
+            countryCode: 'PT',
+          },
+          contact: {
+            phone: '+351 21 0044000',
+            fax: '+351 21 7936672',
+          },
+          description: {
+            lang: 'en',
+            text:
+              'Relax with city views from the rooftop pool at the Central Holiday Inn Lisbon hotel 500 metres from Alameda Metro Station.       A modern hotel in the bustling City Centre Holiday Inn Lisbon is just 15 minutes from Lisbon Airport by public shuttle bus. If you are arriving by car you will appreciate easy access from the A2 highway and ample parking at the hotel. Enjoy a warm welcome on arrival in our marbled lobby before working out in the mini gym or taking in far reaching views across Lisbon from the sunny terrace and our open air rooftop pool.       Make the most of our 24 hour business centre and 7 air conditioned meeting rooms for up to 400 delegates. Close to the citys banking district Holiday Inn Lisbon is also conveniently located opposite Instituto Superior Tcnico and just a few Metro stops from the Fil Trade Fair.       Speed around Lisbon easily from nearby Alameda Saldanha and Campo Pequeno Metro Stations. We are just 2 stops from Museu Calouste Gulbenkians world class artworks and the green spaces of Parque Eduardo Vii. Moorish St Georges Castle set above the winding lanes of Alfama is 4km from the hotel. You can check email using wireless internet throughout the Holiday Inn Lisbon hotel. Our laid back Vasco Da Gama Restaurant has an American buffet breakfast and market fresh Portuguese fare. Round off your day with Drinks in the sociable Almirante bar.',
+          },
+          amenities: [
+            '24_HOUR_FRONT_DESK',
+            '24_HOUR_ROOM_SERVICE',
             'CONFERENCE_FACILITIES',
             'EXCHANGE_FACILITIES',
+            'DOCTOR_ON_CALL',
+            'EXECUTIVE_FLOOR',
+            'GYM',
             'EXPRESS_CHECK_IN',
             'EXPRESS_CHECK_OUT',
             'ACCESSIBLE_FACILITIES',
             'WHEELCHAIR_ACCESSIBLE_PUBLIC_AREA',
-            'WHEELCHAIR_ACCESSIBLE_ELEVATORS',
+            'HANDRAILS_BATHROOM',
+            'ACCESSIBLE_PARKING',
             'WHEELCHAIR_ACCESSIBLE_ROOM',
             'GARAGE_PARKING',
+            'JOGGING_TRACK',
             'LAUNDRY_SERVICE',
-            'RESTAURANT',
+            'ON-SITE_PARKING',
+            'OUTDOOR_POOL',
+            'PARKING',
+            'SWIMMING_POOL',
             'SAFE_DEPOSIT_BOX',
+            'TRANSLATION_SERVICES',
             'DRY_CLEANING',
             'FRONT_DESK',
             'WIRELESS_CONNECTIVITY',
@@ -90,23 +272,26 @@ export default Vue.extend({
             'BUSINESS_CENTER',
             'COMPUTER_RENTAL',
             'LCD/PROJECTOR',
+            'OVERHEAD_PROJECTOR',
             'CONFERENCE_SUITE',
             'CONVENTION_CENTRE',
             'MEETING_FACILITIES',
             'FIRE_SAFETY',
+            'EMERGENCY_BACKUP_GENERATOR',
             'EMERGENCY_LIGHTING',
             'FIRE_DETECTORS',
-            'SPRINKLERS',
-            'FIRST_AID_STAF',
-            'SECURITY_GUARD',
-            'VIDEO_SURVEILANCE',
+            'GUARDED_PARKING',
             'EXTINGUISHERS',
             'FEMA_FIRE_SAFETY_COMPLIANT',
+            'BOATING',
+            'FISHING',
+            'FITNESS_CENTER',
+            'SCUBA_DIVING',
           ],
           media: [
             {
               uri:
-                'http://uat.multimediarepository.testing.amadeus.com/cmr/retrieve/hotel/39A9137DCEC149B59898A0598BE2C76A',
+                'http://uat.multimediarepository.testing.amadeus.com/cmr/retrieve/hotel/5F12C223F73D406A90CDCCF303D0B4C3',
               category: 'EXTERIOR',
             },
           ],
@@ -114,22 +299,26 @@ export default Vue.extend({
         available: true,
         offers: [
           {
-            id: 'QI5WEVQKF6',
-            checkInDate: '2021-04-11',
-            checkOutDate: '2021-04-12',
-            rateCode: '22A',
+            id: 'P5HRR8WJA8',
+            checkInDate: '2021-04-15',
+            checkOutDate: '2021-04-16',
+            rateCode: '86V',
             rateFamilyEstimated: {
-              code: 'BAR',
+              code: 'PRO',
               type: 'P',
             },
+            boardType: 'ROOM_ONLY',
             room: {
               type: '*RH',
               typeEstimated: {
-                category: 'STANDARD_ROOM',
+                category: 'COMFORT_ROOM',
+                beds: 2,
+                bedType: 'DOUBLE',
               },
               description: {
                 text:
-                  'BEST FLEXIBLE RATE\nSTANDARD ROOM NONSMOKING RELAX IN A\nCONTEMPORARY DESIGNED ROOM. WE WILL DO OUR BEST',
+                  'BOOK NOW, PAY LATER\nSTANDARD ROOM Comfortable cosy room (double bed\n2mx1,5m/2 double beds 2mx1.35m). Wi-Fi, air',
+                lang: 'PT',
               },
             },
             guests: {
@@ -137,25 +326,37 @@ export default Vue.extend({
             },
             price: {
               currency: 'EUR',
-              base: '219.00',
-              total: '224.76',
+              base: '80.50',
+              total: '84.50',
+              taxes: [
+                {
+                  code: 'MISCELLANEOUS',
+                  percentage: '6.00',
+                  included: true,
+                },
+                {
+                  code: 'SERVICE_CHARGE',
+                  pricingFrequency: 'PER_NIGHT',
+                  pricingMode: 'PER_OCCUPANT',
+                  amount: '2.00',
+                  currency: 'EUR',
+                  included: false,
+                },
+              ],
               variations: {
                 average: {
-                  base: '219.00',
+                  base: '80.50',
                 },
                 changes: [
                   {
-                    startDate: '2021-04-11',
-                    endDate: '2021-04-12',
-                    base: '219.00',
+                    startDate: '2021-04-15',
+                    endDate: '2021-04-16',
+                    base: '80.50',
                   },
                 ],
               },
             },
             policies: {
-              holdTime: {
-                deadline: '2021-04-11T16:00:00',
-              },
               guarantee: {
                 acceptedPayments: {
                   creditCards: ['AX', 'VI', 'CA'],
@@ -165,237 +366,92 @@ export default Vue.extend({
               paymentType: 'guarantee',
               cancellation: {
                 numberOfNights: 1,
-                deadline: '2021-04-11T16:00:00+02:00',
+                deadline: '2021-04-14T16:00:00+01:00',
               },
             },
           },
         ],
         self:
-          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=HIPARC12&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
+          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=HILISECB&adults=2&checkInDate=2021-04-15&checkOutDate=2021-04-16&paymentPolicy=NONE&roomQuantity=1&view=FULL',
       },
       {
         type: 'hotel-offers',
         hotel: {
           type: 'hotel',
-          hotelId: 'XKPAR321',
-          chainCode: 'XK',
-          dupeId: '501107986',
-          name: 'The Demo Hotel',
+          hotelId: 'HSBCNAGY',
+          chainCode: 'HS',
+          dupeId: '700053954',
+          name: 'Cataluña',
           rating: '2',
-          cityCode: 'PAR',
-          latitude: 48.85801,
-          longitude: 2.34661,
+          cityCode: 'BCN',
+          latitude: 41.38548,
+          longitude: 2.1718,
           hotelDistance: {
-            distance: 0.4,
+            distance: 0.2,
             distanceUnit: 'KM',
           },
           address: {
-            lines: ['18 avenue Victoria'],
-            postalCode: '75001',
-            cityName: 'Paris',
-            countryCode: 'FR',
+            lines: ['SANTA ANNA, 24'],
+            postalCode: '8002',
+            cityName: 'BARCELONA',
+            countryCode: 'ES',
           },
           contact: {
-            phone: '+33 4 97042801',
-            fax: '+33 4 92943104',
-            email: 'resa@theparishotel.com',
-          },
-          amenities: ['MEETING_ROOMS', 'PARKING', 'INTERNET-HIGH_SPEED'],
-        },
-        available: true,
-        offers: [
-          {
-            id: 'V93OOYZE77',
-            checkInDate: '2021-04-11',
-            checkOutDate: '2021-04-12',
-            rateCode: 'ORQ',
-            commission: {
-              amount: '0',
-              percentage: '0',
-            },
-            room: {
-              type: 'C1D',
-              typeEstimated: {
-                category: 'STANDARD_ROOM',
-                beds: 1,
-                bedType: 'DOUBLE',
-              },
-              description: {
-                text: 'Double room',
-              },
-            },
-            guests: {
-              adults: 2,
-            },
-            price: {
-              currency: 'EUR',
-              base: '120.00',
-              total: '130.00',
-              variations: {
-                changes: [
-                  {
-                    startDate: '2021-04-11',
-                    endDate: '2021-04-12',
-                    base: '120.00',
-                  },
-                ],
-              },
-            },
-            policies: {
-              holdTime: {
-                deadline: '2021-04-11T18:00:00',
-              },
-              guarantee: {
-                acceptedPayments: {
-                  creditCards: ['AX', 'CA', 'DC', 'JC', 'VI'],
-                  methods: ['TRAVEL_AGENT_ID', 'CORPORATE_ID', 'CREDIT_CARD'],
-                },
-              },
-              paymentType: 'guarantee',
-            },
-          },
-        ],
-        self:
-          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=XKPAR321&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
-      },
-      {
-        type: 'hotel-offers',
-        hotel: {
-          type: 'hotel',
-          hotelId: 'RTPARSOR',
-          chainCode: 'RT',
-          dupeId: '700043120',
-          name: 'Hotel de Test',
-          rating: '5',
-          cityCode: 'PAR',
-          latitude: 48.84917,
-          longitude: 2.34301,
-          hotelDistance: {
-            distance: 0.6,
-            distanceUnit: 'KM',
-          },
-          address: {
-            lines: ['14 RUE DE LA SORBONNE'],
-            postalCode: '75005',
-            cityName: 'PARIS',
-            countryCode: 'FR',
-          },
-          contact: {
-            phone: '0810515253',
-            fax: '0810515254',
-            email: 'Papa.Noel@free.fr',
+            phone: '(34) 933019150',
+            fax: '(34) 933189403',
+            email: 'hcatalunya@hotelcatalunya.net',
           },
           description: {
             lang: 'en',
             text:
-              'Voici une description normale de notre hotel. Il est situe dans une foret, dispose d une piscine chauffee et de chambres toutes tres spacieuses et calmes',
+              'The hotel Cataluna in Barcelona offers its guests 40 rooms, all renovated in 2006. The rooms feature bath/toilet, satellite TV, Wi-Fi access and air-conditioning. A fax and copy service is available for the guests at the reception.',
           },
           amenities: [
-            'ELEVATOR',
             '24_HOUR_FRONT_DESK',
-            '24_HOUR_ROOM_SERVICE',
-            'CONNECTING_ROOMS',
-            'AIRLINE_DESK',
+            'MULTILINGUAL_STAFF',
+            'ELEVATOR',
+            'INTERNET_SERVICES',
+            'SAFE_DEPOSIT_BOX',
+            'VENDING_MACHINES',
+            'WIRELESS_CONNECTIVITY',
+            'DOCTOR_ON_CALL',
+            'COFFEE_SHOP',
+            'CAR_RENTAL',
+            'EXPRESS_CHECK_OUT',
+            'EXPRESS_CHECK_IN',
+            'CAR_RENTAL',
+            'TOUR_DESK',
+            'LAUNDRY_SERVICE',
             'ATM/CASH_MACHINE',
-            'BABY-SITTING',
-            'PHOTOCOPIER',
-            'PRINTER',
-            'AUDIO-VISUAL_EQUIPMENT',
-            'WHITE/BLACKBOARD',
-            'BUSINESS_CENTER',
-            'CELLULAR_PHONE_RENTAL',
-            'COMPUTER_RENTAL',
-            'EXECUTIVE_DESK',
-            'LCD/PROJECTOR',
-            'MEETING_ROOMS',
-            'OVERHEAD_PROJECTOR',
-            'SECRETARIAL_SERVICES',
-            'CONFERENCE_SUITE',
-            'CONVENTION_CENTRE',
-            'MEETING_FACILITIES',
-            'FIRE_SAFETY',
-            'EMERGENCY_BACKUP_GENERATOR',
-            'EMERGENCY_LIGHTING',
-            'FIRE_DETECTORS',
-            'GUARDED_PARKING',
-            'RESTRICTED_PUBLIC_ACCESS',
-            'EXTERIOR_ROOM_ENTRY',
-            'INTERIOR_ROOM_ENTRY',
-            'SMOKE_DETECTOR',
-            'ROOMS_WITH_BALCONIES',
-            'SPRINKLERS',
-            'FIRST_AID_STAF',
-            'SECURITY_GUARD',
-            'VIDEO_SURVEILANCE',
-            'EXTINGUISHERS',
-            'FEMA_FIRE_SAFETY_COMPLIANT',
-            'FIRE_SAFETY_NOT_STANDARD',
-            'WHEELCHAIR_ACCESSIBLE_WASHBASIN',
-            'DISABLED_FACILITIES',
-            'WHEELCHAIR_ACCESSIBLE_LIGHT_SWITCH',
-            'WHEELCHAIR_ACCESSIBLE_PUBLIC_AREA',
-            'SERVICE_DOGS_ALLOWED',
-            'DISABLED_ACCESSIBLE_TOILETS',
-            'HANDRAILS_BATHROOM',
-            'ADAPTED_PHONES',
-            'WHEELCHAIR_ACCESSIBLE_ELEVATORS',
-            'TV_SUBTITLES/CAPTION',
-            'ACCESSIBLE_PARKING',
-            'EMERGENCY_CORD/BUTTON_BATHROOM',
-            'EMERGENCY_PLAN_FOR_DISABLED',
-            'HEARING_INDUCTION_LOOPS',
-            'BRAILLE/LARGE_PRINT_MENU',
-            'DISABLED_TRAINED_STAFF',
-            'VIBRATING_PILLOWS_AVAILABLE',
-            'ACCESSIBLE_BATH_CONTROLS',
-            'ACCESSIBLE_BATHS',
-            'BRAILLE/LARGE_PRINT_LITERATURE',
-            'ADAPT_ROOM_DOORS',
-            'WHEELCHAIR_ACCESSIBLE_ROOM',
-            'SPECIAL_NEEDS_MENU',
-            'WIDE_ENTRANCE',
-            'WIDE_CORRIDORS',
-            'WIDE_RESTAURANT_ENTRANCE',
-            'AIR_CONDITIONING',
-            'ALARM_CLOCK',
-            'BABY_LISTENING_DEVICE',
-            'BATH',
-            'BIDET',
-            'CABLE_TELEVISION',
-            'CRIBS_AVAILABLE',
             'BEACH',
-            'BOATING',
-            'BOWLING',
-            'FISHING',
-            'GOLF',
-            'GOLF',
-            'FITNESS_CENTER',
+            'WATER_SPORTS',
+          ],
+          media: [
+            {
+              uri:
+                'http://uat.multimediarepository.testing.amadeus.com/cmr/retrieve/hotel/C6DE359F99B249B0B4A6F197D6235765',
+              category: 'EXTERIOR',
+            },
           ],
         },
         available: true,
         offers: [
           {
-            id: '5NF1K7GPQV',
+            id: 'C8B3Z7BTHM',
             checkInDate: '2021-04-11',
             checkOutDate: '2021-04-12',
-            rateCode: 'RDI',
-            rateFamilyEstimated: {
-              code: 'RAC',
-              type: 'P',
-            },
+            rateCode: 'RAC',
             commission: {
-              amount: '0',
-              percentage: '0',
+              percentage: '4.00',
             },
             room: {
-              type: 'B1D',
+              type: 'ROH',
               typeEstimated: {
                 category: 'STANDARD_ROOM',
-                beds: 1,
-                bedType: 'DOUBLE',
               },
               description: {
-                text: 'Rack rate-Room only\nStandard Room',
+                text:
+                  'TradeFair-Rate\nStandard room A standard room consists of a room with shower-toilet or bathtub-toilet.',
               },
             },
             guests: {
@@ -403,39 +459,37 @@ export default Vue.extend({
             },
             price: {
               currency: 'EUR',
-              total: '310.00',
+              total: '95.00',
               variations: {
                 average: {
-                  base: '310.00',
+                  total: '95.00',
                 },
                 changes: [
                   {
                     startDate: '2021-04-11',
                     endDate: '2021-04-12',
-                    total: '310.00',
+                    total: '95.00',
                   },
                 ],
               },
             },
             policies: {
-              holdTime: {
-                deadline: '2021-04-11T18:00:00',
-              },
               guarantee: {
                 acceptedPayments: {
-                  creditCards: ['AX', 'BF', 'CA', 'DC', 'EC', 'IK', 'JC', 'VI'],
-                  methods: ['TRAVEL_AGENT_ID', 'CREDIT_CARD'],
+                  creditCards: ['DC', 'DN', 'VI', 'MC', 'CA', 'AX'],
+                  methods: ['CREDIT_CARD'],
                 },
               },
               paymentType: 'guarantee',
               cancellation: {
-                deadline: '2021-04-10T00:00:00+02:00',
+                numberOfNights: 1,
+                deadline: '2021-04-09T22:59:00+02:00',
               },
             },
           },
         ],
         self:
-          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=RTPARSOR&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
+          'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=HSBCNAGY&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
       },
       {
         type: 'hotel-offers',
@@ -821,10 +875,31 @@ export default Vue.extend({
           'https://test.api.amadeus.com/v2/shopping/hotel-offers/by-hotel?hotelId=BRPARVDB&adults=2&paymentPolicy=NONE&roomQuantity=1&view=FULL',
       },
     ],
+    showToaster: false,
+    form: {
+      hotelName: '',
+      checkIn: '',
+      checkOut: '',
+      adults: '',
+    },
   }),
   methods: {
     openDetails(hotel: any) {
       this.$router.push({ path: `/${hotel.hotel.hotelId}` })
+    },
+    onSearch(params: any) {
+      let isValid = true
+      const formData = Object.entries(params)
+      formData.forEach((item) => {
+        if (item[1] === '' || item[1] === 'NaN-NaN-NaN') {
+          isValid = false
+        }
+      })
+      if (!isValid) {
+        this.showToaster = !this.showToaster
+      } else {
+        this.$router.push({ path: `/search`, query: params })
+      }
     },
   },
 })
@@ -912,7 +987,7 @@ export default Vue.extend({
   animation-delay: 0.4s;
   margin-top: 50px;
   position: relative;
-  z-index: -1;
+  z-index: 0;
   &__title {
     margin-bottom: 50px;
     font-size: 1.5rem;
