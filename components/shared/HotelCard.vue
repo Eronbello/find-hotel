@@ -1,5 +1,5 @@
 <template>
-  <div class="tui-hotel-card">
+  <div class="tui-hotel-card" @click="$emit('selected', hotel)">
     <figure class="tui-hotel-card__figure">
       <img
         class="tui-hotel-card__image"
@@ -9,16 +9,23 @@
     </figure>
     <div class="tui-hotel-card__description">
       <div class="tui-hotel-card__stars">
-        <h3>Majestic Palace</h3>
+        <h3>{{ hotel.hotel.name }}</h3>
         <Stars :rating="5" />
       </div>
       <div class="tui-hotel-card__place">
         <Badge message="HOTEL" />
-        <span>Curitiba, Brasil</span>
+        <span>{{
+          `${hotel.hotel.address.countryCode}, ${hotel.hotel.address.cityName}`
+        }}</span>
       </div>
       <div class="tui-hotel-card__details">
-        <span>R$ 150,00 / noite</span>
-        <a href="#">Detalhes</a>
+        <span
+          >{{
+            `${hotel.offers[0].price.currency}  ${hotel.offers[0].price.total}`
+          }}
+          / noite</span
+        >
+        <a>Detalhes</a>
       </div>
     </div>
   </div>
@@ -30,6 +37,12 @@ import Badge from '@/components/shared/Badge.vue'
 import Stars from '@/components/shared/Stars.vue'
 export default Vue.extend({
   components: { Badge, Stars },
+  props: {
+    hotel: {
+      type: Object,
+      required: true,
+    },
+  },
 })
 </script>
 <style lang="scss" scoped>
@@ -68,11 +81,18 @@ export default Vue.extend({
   }
   &__description {
     padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
   }
   &__stars {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    h3 {
+      font-weight: 700;
+    }
   }
   &__details {
     display: flex;
@@ -92,7 +112,7 @@ export default Vue.extend({
     margin-bottom: 20px;
   }
   @media screen and (max-width: $screen-tui-s) {
-    width: 45%;
+    width: 48%;
   }
   @media screen and (max-width: $screen-tui-xs) {
     width: 100%;
