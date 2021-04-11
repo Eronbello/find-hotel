@@ -17,8 +17,8 @@
         <SearchCard :form="form" class="tui-search__card" @search="onSearch" />
       </section>
       <section class="tui-categories"></section>
+      <h3 class="tui-recommended__title">Recommended stays</h3>
       <section class="tui-recommended">
-        <h3 class="tui-recommended__title">Recommended stays</h3>
         <div class="tui-recommended__list">
           <template v-for="(hotel, index) in hotelList">
             <hotel-card :key="index" :hotel="hotel" @selected="openDetails" />
@@ -981,6 +981,13 @@ export default Vue.extend({
   }
 }
 
+.tui-recommended__title {
+  margin-bottom: 50px;
+  font-size: 1.5rem;
+  color: #092a5e;
+  text-align: center;
+  margin-top: 50px;
+}
 .tui-recommended {
   opacity: 0;
   animation: fade-in-top ease 0.4s forwards;
@@ -988,12 +995,6 @@ export default Vue.extend({
   margin-top: 50px;
   position: relative;
   z-index: 0;
-  &__title {
-    margin-bottom: 50px;
-    font-size: 1.5rem;
-    color: #092a5e;
-    text-align: center;
-  }
   &__list {
     display: flex;
     flex-flow: row wrap;
