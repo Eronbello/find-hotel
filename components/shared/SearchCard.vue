@@ -1,42 +1,41 @@
 <template>
   <div class="tui-search-card">
-    <h3 class="tui-search-card__title">Encontre sua estadia perfeita!</h3>
+    <h3 class="tui-search-card__title">Find your perfect stay!</h3>
     <Input
-      v-model="form.hotelName"
+      v-model="params.hotelName"
       type="text"
-      placeholder="Pesquise pelo nome do hotel"
+      placeholder="Search by hotel name"
     />
     <div class="tui-search-card__date">
       <datepicker
-        v-model="form.checkIn"
+        v-model="params.checkInDate"
         class="tui-search-card__date-picker"
         :format="format"
-        placeholder="CHECK-IN"
+        placeholder="Check-in"
       ></datepicker>
       <datepicker
-        v-model="form.checkOut"
+        v-model="params.checkOutDate"
         :format="format"
         class="tui-search-card__date-picker"
-        placeholder="CHECK-OUT"
+        placeholder="Check-out"
       ></datepicker>
     </div>
     <Input
-      v-model="form.adults"
+      v-model="params.adults"
       type="number"
-      placeholder="Quantidade de hóspedes"
+      placeholder="Number of guests"
     />
-    <NuxtLink
+    <a
       class="tui-search-card__action"
-      :to="{
-        path: 'search',
-        query: {
-          hotelName: form.hotelName,
-          adults: form.adults,
-          checkInDate: formatDate(form.checkIn),
-          checkOutDate: formatDate(form.checkOut),
-        },
-      }"
-      >Pesquisar</NuxtLink
+      @click="
+        $emit('search', {
+          hotelName: params.hotelName,
+          adults: params.adults,
+          checkInDate: formatDate(params.checkInDate),
+          checkOutDate: formatDate(params.checkOutDate),
+        })
+      "
+      >Search</a
     >
   </div>
 </template>
@@ -48,15 +47,25 @@ import Datepicker from 'vuejs-datepicker'
 import dateHelper from '@/helpers/date'
 export default Vue.extend({
   components: { Input, Datepicker },
+  props: {
+    form: {
+      type: Object,
+      required: true,
+    },
+  },
   data: () => ({
     format: 'yyyy-MM-dd',
-    form: {
+    params: {
       hotelName: '',
-      checkIn: '',
-      checkOut: '',
+      checkOutDate: '',
+      checkInDate: '',
       adults: '',
     },
   }),
+  mounted() {
+    console.log(this.form)
+    this.params = this.form
+  },
   methods: {
     formatDate(date: Date) {
       return dateHelper(date)
@@ -92,12 +101,15 @@ export default Vue.extend({
   }
   &__action {
     background-color: #d40e14;
+    cursor: pointer;
     text-decoration: none;
     color: white;
     padding: 8px;
     border-radius: 2px;
     justify-self: flex-end;
     text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
   }
   @media screen and (max-width: $screen-tui-s) {
     padding: 20px;
