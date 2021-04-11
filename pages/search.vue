@@ -90,6 +90,9 @@ export default Vue.extend({
       })
       if (!isValid) {
         this.showToaster = !this.showToaster
+        setTimeout(() => {
+          this.showToaster = false
+        }, 2000)
       } else {
         this.$router.push({ path: `/search`, query: params })
         this.isLoading = true

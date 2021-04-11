@@ -1,7 +1,7 @@
 <template>
   <div
     :style="{ backgroundColor: color }"
-    :class="['toaster', showToaster && 'toaster--show']"
+    :class="['tui-toaster', show && 'tui-toaster--show']"
   >
     {{ message }}
   </div>
@@ -27,22 +27,11 @@ export default Vue.extend({
       required: true,
     },
   },
-  data: () => ({
-    showToaster: false,
-  }),
-  watch: {
-    show() {
-      this.showToaster = this.show
-      setTimeout(() => {
-        this.showToaster = false
-      }, 2000)
-    },
-  },
 })
 </script>
 
 <style lang="scss" scoped>
-.toaster {
+.tui-toaster {
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
@@ -57,7 +46,7 @@ export default Vue.extend({
   top: 30px;
 }
 
-.toaster--show {
+.tui-toaster--show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

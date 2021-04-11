@@ -5,6 +5,7 @@
     width="34"
     height="34"
     viewBox="0 0 34 34"
+    class="tui-locale-icon"
     role="presentation"
     aria-hidden="true"
   >

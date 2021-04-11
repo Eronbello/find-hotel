@@ -49,7 +49,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-// import Badge from '@/components/shared/Badge.vue'
 import Stars from '@/components/shared/Stars.vue'
 import LocaleIcon from '@/components/shared/LocaleIcon.vue'
 export default Vue.extend({

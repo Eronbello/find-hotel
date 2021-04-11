@@ -5,7 +5,7 @@
         href="http://www.tuigroup.com/en-en"
         target="_blank"
         rel="noopener"
-        class="app-copyrights"
+        class="tui-footer__link"
         data-v-38e248be=""
         data-v-a1d4f7a0=""
         >© TUI Group</a
