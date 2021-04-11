@@ -21,7 +21,9 @@ export default Vue.extend({
   color: #092a5e;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  padding: 0 10px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 0.8rem;
   display: inline;
 }
 </style>
