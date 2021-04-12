@@ -48,3 +48,18 @@ To run the application tests, follow these steps:
 ```bash
 $ yarn test
 ```
+
+## :rocket: Improvements
+
+Possible improvements
+
+- Add tests to api services
+- Add utility classes
+- Add i18n
+- Add custom favicon
+- Improve detail page layout
+
+## :rocket: Explanations
+
+I decided not to use SSR as I am using a lib for the datepicker and it does not support SSR
+
