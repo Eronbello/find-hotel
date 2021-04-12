@@ -1,5 +1,10 @@
 <template>
   <div class="tui-details-page">
+    <Toaster
+      message="Error loading temperature data"
+      color="#d40e14"
+      :show="showToaster"
+    />
     <div class="tui-container">
       <div v-if="isLoading" class="tui-details-page__loading">
         <LoadingIcon />
@@ -64,11 +69,13 @@ import Vue from 'vue'
 import apiService from '@/services/api'
 import apiWeatherService from '@/services/weatherApi'
 import LoadingIcon from '@/components/shared/LoadingIcon.vue'
+import Toaster from '@/components/shared/Toaster.vue'
 import Stars from '@/components/shared/Stars.vue'
 export default Vue.extend({
-  components: { LoadingIcon, Stars },
+  components: { LoadingIcon, Stars, Toaster },
   data: () => ({
     hotel: {},
+    showToaster: false,
     weather: {},
     isLoading: true,
   }),
@@ -79,17 +86,25 @@ export default Vue.extend({
     const data = await response.json()
     this.hotel = data.data
     const cityName = data.data.hotel.address.cityName
-    const weatherResponse = await apiWeatherService.searchCity(
-      cityName as string
-    )
-    const dataWeather = await weatherResponse.json()
-    if (dataWeather.length > 0) {
-      const responseWeatherCity = await apiWeatherService.searchWeather(
-        dataWeather[0].Key as string
+    try {
+      const weatherResponse = await apiWeatherService.searchCity(
+        cityName as string
       )
-      const dataWeatherCity = await responseWeatherCity.json()
-      this.weather = dataWeatherCity[0]
+      const dataWeather = await weatherResponse.json()
+      if (dataWeather.length > 0) {
+        const responseWeatherCity = await apiWeatherService.searchWeather(
+          dataWeather[0].Key as string
+        )
+        const dataWeatherCity = await responseWeatherCity.json()
+        this.weather = dataWeatherCity[0]
+      }
+    } catch (error) {
+      this.showToaster = true
+      setTimeout(() => {
+        this.showToaster = false
+      }, 2000)
     }
+
     this.isLoading = false
   },
 })
