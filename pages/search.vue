@@ -2,7 +2,7 @@
   <div class="tui-search-page">
     <Toaster
       message="Please fill all the form"
-      color="#d40e14"
+      color="$red-500"
       :show="showToaster"
     />
     <div class="tui-container">
@@ -118,7 +118,7 @@ export default Vue.extend({
 }
 .tui-hotels-list__not-exists {
   text-align: center;
-  color: #092a5e;
+  color: $blue-500;
   margin-top: 50px;
   font-size: 2rem;
 }

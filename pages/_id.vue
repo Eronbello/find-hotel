@@ -2,7 +2,7 @@
   <div class="tui-details-page">
     <Toaster
       message="Error loading temperature data"
-      color="#d40e14"
+      color="$red-500"
       :show="showToaster"
     />
     <div class="tui-container">
@@ -138,7 +138,7 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #092a5e;
+    color: $blue-500;
     font-size: 15px;
     font-weight: 700;
     font-style: normal;
@@ -147,7 +147,7 @@ export default Vue.extend({
     letter-spacing: 0.025em;
   }
   &__address {
-    color: #092a5e;
+    color: $blue-500;
     font-size: 12px;
     font-weight: 400;
     font-style: normal;
@@ -176,7 +176,7 @@ export default Vue.extend({
       flex-wrap: wrap;
       padding: 20px 0;
       li {
-        color: #092a5e;
+        color: $blue-500;
         font-weight: 700;
       }
     }

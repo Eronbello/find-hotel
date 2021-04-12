@@ -93,7 +93,7 @@ export default Vue.extend({
   &__details {
     flex-grow: 1;
     padding: 19px 30px 16px 30px;
-    color: rgb(9, 42, 94);
+    color: $blue-500;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -105,7 +105,7 @@ export default Vue.extend({
     width: 215px;
     padding: 0 30px 0 30px;
     margin: 19px 0 16px 0;
-    color: rgb(9, 42, 94);
+    color: $blue-500;
     border-left: 1px solid #e2e2e2;
     justify-content: space-between;
     min-width: 215px;
@@ -124,7 +124,7 @@ export default Vue.extend({
     height: 38px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16);
     outline: none;
-    background: #092a5e;
+    background: $blue-500;
     cursor: pointer;
     color: white;
     font-weight: 700;

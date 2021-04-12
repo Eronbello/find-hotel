@@ -94,12 +94,12 @@ export default Vue.extend({
     font-style: normal;
     font-size: 25px;
     line-height: 1;
-    color: #092a5e;
+    color: $blue-500;
     margin-bottom: 20px;
     text-align: center;
   }
   &__action {
-    background-color: #d40e14;
+    background-color: $red-500;
     cursor: pointer;
     text-decoration: none;
     color: white;

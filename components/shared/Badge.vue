@@ -18,7 +18,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .tui-badge {
-  color: #092a5e;
+  color: $blue-500;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   padding: 2px 10px;

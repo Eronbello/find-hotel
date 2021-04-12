@@ -2,7 +2,7 @@
   <div class="tui-main-page">
     <Toaster
       message="Please fill all the form"
-      color="#d40e14"
+      color="$red-500"
       :show="showToaster"
     />
     <div class="tui-container">
@@ -987,7 +987,7 @@ export default Vue.extend({
 .tui-recommended__title {
   margin-bottom: 50px;
   font-size: 1.5rem;
-  color: #092a5e;
+  color: $blue-500;
   text-align: center;
   margin-top: 50px;
 }

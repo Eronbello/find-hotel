@@ -58,7 +58,7 @@ export default {
     line-height: 23px;
     padding: 0 0 0 6px;
     border-radius: 3px;
-    border-color: #00000054;
+    border-color: $border-black;
     border-style: solid;
     border-width: 1px;
     &:focus {
